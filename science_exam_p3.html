@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ข้อสอบวิทยาศาสตร์ ป.3 เทอม 2 (ปลายภาค)</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Kanit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a3a6b;
+    --accent: #e8a020;
+    --accent2: #2e9e6b;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --border: #c8d8ef;
+    --text: #1a2640;
+    --muted: #6b7fa3;
+    --choice-bg: #eef3fb;
+    --answer-bg: #fff8e6;
+    --answer-border: #e8a020;
+    --section-energy: #1a3a6b;
+    --section-earth: #1a6b4a;
+    --print-break: always;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* ===== HEADER ===== */
+  .exam-header {
+    background: linear-gradient(135deg, #1a3a6b 0%, #1e4d8c 50%, #2e6ab0 100%);
+    border-radius: 16px;
+    padding: 36px 40px;
+    color: white;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(26,58,107,0.25);
+  }
+
+  .exam-header::before {
+    content: '🔬';
+    position: absolute;
+    font-size: 120px;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.12;
+  }
+
+  .exam-header .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a2640;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .exam-header h1 {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .exam-header .subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+  }
+
+  .exam-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+
+  .meta-icon { font-size: 16px; }
+
+  /* Student info */
+  .student-info {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .info-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .info-line {
+    border-bottom: 2px solid var(--border);
+    min-height: 28px;
+    width: 100%;
+  }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 10px;
+    padding: 14px 22px;
+    margin: 28px 0 16px;
+    color: white;
+  }
+
+  .section-header.energy { background: linear-gradient(90deg, #1a3a6b, #2e6ab0); }
+  .section-header.earth { background: linear-gradient(90deg, #1a6b4a, #2e9e6b); }
+
+  .section-icon { font-size: 28px; }
+
+  .section-title {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+  }
+
+  .section-range {
+    margin-left: auto;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 3px 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* ===== QUESTION CARD ===== */
+  .question-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+    transition: box-shadow 0.2s;
+  }
+
+  .question-card:hover { box-shadow: 0 4px 16px rgba(26,58,107,0.09); }
+
+  .question-top {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .q-number {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    margin-top: 1px;
+  }
+
+  .q-number.energy-num { background: #1a3a6b; }
+  .q-number.earth-num { background: #1a6b4a; }
+
+  .q-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.6;
+  }
+
+  /* Choices */
+  .choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding-left: 46px;
+  }
+
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--choice-bg);
+    border: 1.5px solid transparent;
+    border-radius: 8px;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .choice:hover {
+    border-color: var(--primary);
+    background: #dce8f7;
+  }
+
+  .choice-label {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 20px;
+  }
+
+  .choice-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* ===== INSTRUCTIONS ===== */
+  .instructions {
+    background: #fffbf0;
+    border: 1.5px solid #f0d080;
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin-bottom: 24px;
+  }
+
+  .instructions h3 {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    color: #8b6000;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .instructions ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .instructions ul li::before {
+    content: '▸ ';
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .instructions ul li {
+    font-size: 13.5px;
+    color: #5a4000;
+  }
+
+  /* ===== ANSWER KEY ===== */
+  .answer-key-header {
+    background: linear-gradient(135deg, #b8680a 0%, #e8a020 100%);
+    border-radius: 16px;
+    padding: 28px 40px;
+    color: white;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(184,104,10,0.25);
+  }
+
+  .answer-key-header::before {
+    content: '✅';
+    position: absolute;
+    font-size: 100px;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.15;
+  }
+
+  .answer-key-header h2 {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .answer-key-header p {
+    opacity: 0.9;
+    font-size: 14px;
+  }
+
+  .answer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .answer-item {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .answer-item .q-ref {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .answer-item .a-label {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--primary);
+  }
+
+  .answer-item .a-text {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .answer-item .a-explain {
+    font-size: 11.5px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 6px;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* ===== SCORE TABLE ===== */
+  .score-section {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 24px;
+  }
+
+  .score-section h3 {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: var(--primary);
+  }
+
+  .score-boxes {
+    display: flex;
+    gap: 12px;
+  }
+
+  .score-box {
+    flex: 1;
+    text-align: center;
+    background: var(--choice-bg);
+    border-radius: 10px;
+    padding: 16px 10px;
+  }
+
+  .score-box .s-label { font-size: 12px; font-weight: 700; color: var(--muted); }
+  .score-box .s-value { font-family: 'Kanit', sans-serif; font-size: 28px; font-weight: 800; color: var(--primary); }
+  .score-box .s-unit { font-size: 12px; color: var(--muted); }
+
+  /* ===== PAGE BREAK / DIVIDER ===== */
+  .page-divider {
+    border: none;
+    border-top: 3px dashed var(--border);
+    margin: 40px 0;
+  }
+
+  /* ===== FOOTER ===== */
+  .exam-footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; font-size: 13px; }
+    .page { padding: 10px; max-width: 100%; }
+    .exam-header { border-radius: 8px; }
+    .question-card { break-inside: avoid; }
+    .answer-section { page-break-before: always; }
+    .page-divider { display: none; }
+    .print-btn { display: none; }
+  }
+
+  /* Print button */
+  .print-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 24px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(26,58,107,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+    z-index: 100;
+  }
+
+  .print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(26,58,107,0.45);
+  }
+
+  .highlight { background: #fff3cd; padding: 1px 4px; border-radius: 3px; }
+
+  /* Tab navigation */
+  .tab-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+  }
+
+  .tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- Tab Navigation -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('exam')">📝 ข้อสอบ</button>
+    <button class="tab-btn" onclick="showTab('answer')">✅ เฉลย</button>
+  </div>
+
+  <!-- ==================== EXAM TAB ==================== -->
+  <div id="tab-exam" class="tab-content active">
+
+    <div class="exam-header">
+      <div class="badge">วิทยาศาสตร์ · ประถมศึกษาปีที่ 3</div>
+      <h1>ข้อสอบปลายภาคเรียนที่ 2<br>วิชาวิทยาศาสตร์ ชั้นประถมศึกษาปีที่ 3</h1>
+      <div class="subtitle">หน่วยการเรียนรู้: พลังงานไฟฟ้าและชีวิต · วิทยาศาสตร์โลกและอวกาศ</div>
+      <div class="exam-meta">
+        <div class="meta-item"><span class="meta-icon">📋</span> จำนวน 30 ข้อ</div>
+        <div class="meta-item"><span class="meta-icon">⭐</span> 30 คะแนน</div>
+        <div class="meta-item"><span class="meta-icon">⏰</span> 60 นาที</div>
+        <div class="meta-item"><span class="meta-icon">✏️</span> ปรนัย 4 ตัวเลือก</div>
+      </div>
+    </div>
+
+    <div class="student-info">
+      <div class="info-field">
+        <div class="info-label">ชื่อ - นามสกุล</div>
+        <div class="info-line"></div>
+      </div>
+      <div class="info-field">
+        <div class="info-label">ชั้น / ห้อง</div>
+        <div class="info-line"></div>
+      </div>
+      <div class="info-field">
+        <div class="info-label">วันที่สอบ</div>
+        <div class="info-line"></div>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h3>📌 คำชี้แจง</h3>
+      <ul>
+        <li>ข้อสอบมีทั้งหมด 30 ข้อ ข้อละ 1 คะแนน รวม 30 คะแนน</li>
+        <li>จงเลือกคำตอบที่ถูกต้องที่สุดเพียงข้อเดียว แล้วทำเครื่องหมาย ✕ ลงในช่องตัวเลือก A, B, C หรือ D</li>
+        <li>ห้ามใช้เครื่องมือช่วยคำนวณหรืออุปกรณ์อิเล็กทรอนิกส์ทุกชนิด</li>
+        <li>ตอบด้วยลายมือที่อ่านได้ชัดเจน</li>
+      </ul>
+    </div>
+
+    <!-- ===== SECTION 1: ENERGY ===== -->
+    <div class="section-header energy">
+      <div class="section-icon">⚡</div>
+      <div>
+        <div class="section-title">ส่วนที่ 1: พลังงานไฟฟ้าและชีวิต (Energy & Life)</div>
+        <div style="font-size:13px;opacity:0.85;">การเปลี่ยนพลังงาน · วงจรไฟฟ้า · การผลิตไฟฟ้า · การใช้ไฟฟ้าอย่างประหยัดและปลอดภัย</div>
+      </div>
+      <div class="section-range">ข้อ 1–22</div>
+    </div>
+
+    <!-- Questions 1-22 -->
+
+    <!-- Q1 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">1</div>
+        <div class="q-text">เครื่องใช้ไฟฟ้าชนิดใดเปลี่ยนพลังงานไฟฟ้าเป็นพลังงานแสง?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">พัดลม</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">หลอดไฟ</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">เตาไฟฟ้า</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ตู้เย็น</span></div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">2</div>
+        <div class="q-text">พัดลมเปลี่ยนพลังงานไฟฟ้าเป็นพลังงานชนิดใด?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">พลังงานความร้อน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">พลังงานแสง</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">พลังงานกล</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">พลังงานเคมี</span></div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">3</div>
+        <div class="q-text">เตารีดไฟฟ้าเปลี่ยนพลังงานไฟฟ้าเป็นพลังงานใด?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">พลังงานกล</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">พลังงานเสียง</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">พลังงานความร้อน</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">พลังงานแสง</span></div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">4</div>
+        <div class="q-text">วิทยุเปลี่ยนพลังงานไฟฟ้าเป็นพลังงานชนิดใดเป็นหลัก?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">พลังงานแสง</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">พลังงานเสียง</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">พลังงานความร้อน</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">พลังงานกล</span></div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">5</div>
+        <div class="q-text">ข้อใดคือส่วนประกอบที่สำคัญของวงจรไฟฟ้าอย่างง่าย?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">สายไฟ หลอดไฟ และถ่านไฟฉาย</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">สายไฟ กระจก และถ่านไฟฉาย</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ไม้บรรทัด ยางลบ และดินสอ</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">กระดาษ สายไฟ และแม่เหล็ก</span></div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">6</div>
+        <div class="q-text">วงจรไฟฟ้าจะครบวงจรหรือไม่ หากตัดสายไฟออกหนึ่งเส้น?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ครบวงจร กระแสไฟฟ้าไหลได้</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ไม่ครบวงจร กระแสไฟฟ้าไม่ไหล</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ขึ้นอยู่กับชนิดของหลอดไฟ</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ขึ้นอยู่กับจำนวนถ่านไฟฉาย</span></div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">7</div>
+        <div class="q-text">ถ่านไฟฉายในวงจรไฟฟ้าทำหน้าที่อะไร?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ให้แสงสว่าง</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">เป็นแหล่งพลังงาน</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ลำเลียงกระแสไฟฟ้า</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ตัดกระแสไฟฟ้า</span></div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">8</div>
+        <div class="q-text">สิ่งใดต่อไปนี้นำไฟฟ้าได้ดี และสามารถใช้เป็นตัวนำในวงจรไฟฟ้าได้?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ยางลบ</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">พลาสติก</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ลวดทองแดง</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ไม้</span></div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">9</div>
+        <div class="q-text">แหล่งพลังงานชนิดใดที่ใช้น้ำไหลผลิตกระแสไฟฟ้า?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">โรงไฟฟ้าถ่านหิน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">โรงไฟฟ้าพลังงานลม</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">โรงไฟฟ้าพลังน้ำ (เขื่อน)</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">โรงไฟฟ้านิวเคลียร์</span></div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">10</div>
+        <div class="q-text">พลังงานแสงอาทิตย์สามารถนำมาผลิตไฟฟ้าได้โดยใช้อุปกรณ์ใด?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">กังหันลม</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">แผงโซลาร์เซลล์</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">เขื่อน</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">เตาเผาถ่านหิน</span></div>
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">11</div>
+        <div class="q-text">ข้อใดเป็นประโยชน์ของไฟฟ้าในชีวิตประจำวัน?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ให้ความสว่างแก่บ้านเรือน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ทำให้เกิดน้ำท่วม</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ทำให้ดินเสื่อมสภาพ</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ก่อให้เกิดมลพิษทางอากาศ</span></div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">12</div>
+        <div class="q-text">การใช้ไฟฟ้าในโรงพยาบาลช่วยในด้านใดมากที่สุด?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">การเพาะปลูกพืชผัก</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">การรักษาพยาบาลและใช้เครื่องมือแพทย์</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">การก่อสร้างอาคาร</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">การขนส่งทางน้ำ</span></div>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">13</div>
+        <div class="q-text">วิธีใดประหยัดพลังงานไฟฟ้าได้ดีที่สุดเมื่อออกจากห้อง?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">เปิดแอร์ทิ้งไว้</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ปิดไฟและเครื่องใช้ไฟฟ้าทุกชนิด</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">เปิดทีวีทิ้งไว้เป็นเพื่อน</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">เปิดไฟทิ้งไว้เพื่อกันขโมย</span></div>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">14</div>
+        <div class="q-text">ข้อใดเป็นวิธีประหยัดไฟฟ้าที่ถูกต้อง?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ซักผ้าทีละชิ้นทุกวัน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">เปิดตู้เย็นทิ้งไว้เพื่อระบายความร้อนในห้อง</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ใช้หลอด LED แทนหลอดไส้</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ชาร์จโทรศัพท์ค้างคืนทุกวัน</span></div>
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">15</div>
+        <div class="q-text">ข้อใดเป็นอันตรายจากการใช้ไฟฟ้าที่ควรระวัง?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">การปิดไฟก่อนนอน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">การใช้เครื่องใช้ไฟฟ้าใกล้น้ำ</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">การถอดปลั๊กเครื่องใช้ไฟฟ้า</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">การเลือกซื้อเครื่องใช้ไฟฟ้าที่มีฉลากประหยัดไฟ</span></div>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">16</div>
+        <div class="q-text">หากปลั๊กไฟชำรุด ควรทำอย่างไร?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ใช้ต่อไปตามปกติ</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ใช้เทปกระดาษพันทับ</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">แจ้งผู้ใหญ่และให้ช่างซ่อมแซม</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">เอามือจับสายไฟที่ชำรุด</span></div>
+      </div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">17</div>
+        <div class="q-text">ฉลากประหยัดไฟเบอร์ 5 บนเครื่องใช้ไฟฟ้าหมายความว่าอย่างไร?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ใช้ไฟฟ้ามากที่สุด</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ราคาถูกที่สุด</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ประหยัดไฟฟ้าสูงสุด</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ซ่อมแซมง่ายที่สุด</span></div>
+      </div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">18</div>
+        <div class="q-text">ข้อใดไม่ใช่แหล่งพลังงานที่ใช้ผลิตไฟฟ้า?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ถ่านหิน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">พลังงานลม</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">น้ำ</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">น้ำแข็ง</span></div>
+      </div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">19</div>
+        <div class="q-text">การเผาถ่านหินเพื่อผลิตไฟฟ้ามีผลเสียอย่างไร?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ทำให้ดินอุดมสมบูรณ์</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ทำให้อากาศบริสุทธิ์</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ก่อให้เกิดมลพิษทางอากาศ</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ทำให้น้ำใสสะอาด</span></div>
+      </div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">20</div>
+        <div class="q-text">ข้อใดกล่าวถึงโรงไฟฟ้าพลังงานลมได้ถูกต้อง?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ปล่อยควันพิษมาก</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ใช้พลังงานสะอาดและหมุนเวียนได้</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ทำงานได้เฉพาะกลางคืน</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ต้องการน้ำปริมาณมาก</span></div>
+      </div>
+    </div>
+
+    <!-- Q21 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">21</div>
+        <div class="q-text">นักเรียนควรทำอย่างไรเพื่อความปลอดภัยเมื่อพบสายไฟฟ้าขาดหล่นบนพื้น?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">เข้าไปจับสายไฟเพื่อเก็บ</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">เดินข้ามไปตามปกติ</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">แจ้งผู้ใหญ่หรือเจ้าหน้าที่ทันที และอย่าเข้าใกล้</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ใช้ไม้ไผ่เขี่ยออก</span></div>
+      </div>
+    </div>
+
+    <!-- Q22 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number energy-num">22</div>
+        <div class="q-text">เครื่องใช้ไฟฟ้าในข้อใดเปลี่ยนพลังงานไฟฟ้าเป็นทั้งพลังงานแสงและพลังงานความร้อน?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">หลอดไส้</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">พัดลม</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">วิทยุ</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ปลั๊กไฟ</span></div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 2: EARTH & SPACE ===== -->
+    <div class="section-header earth">
+      <div class="section-icon">🌍</div>
+      <div>
+        <div class="section-title">ส่วนที่ 2: วิทยาศาสตร์โลกและอวกาศ (Earth & Space)</div>
+        <div style="font-size:13px;opacity:0.85;">ดวงอาทิตย์ · พลังงานแสงและความร้อน · ทิศทั้ง 4</div>
+      </div>
+      <div class="section-range">ข้อ 23–30</div>
+    </div>
+
+    <!-- Q23 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">23</div>
+        <div class="q-text">ดวงอาทิตย์ให้พลังงานใดแก่โลก?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">พลังงานเสียงและพลังงานกล</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">พลังงานแสงและพลังงานความร้อน</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">พลังงานน้ำและพลังงานลม</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">พลังงานเคมีและพลังงานนิวเคลียร์</span></div>
+      </div>
+    </div>
+
+    <!-- Q24 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">24</div>
+        <div class="q-text">พืชใช้แสงจากดวงอาทิตย์ทำกระบวนการใด?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">การหายใจ</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">การสังเคราะห์แสง</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">การย่อยอาหาร</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">การขับถ่าย</span></div>
+      </div>
+    </div>
+
+    <!-- Q25 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">25</div>
+        <div class="q-text">ดวงอาทิตย์ขึ้นทางทิศใดในตอนเช้า?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ทิศเหนือ</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ทิศใต้</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ทิศตะวันตก</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ทิศตะวันออก</span></div>
+      </div>
+    </div>
+
+    <!-- Q26 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">26</div>
+        <div class="q-text">ดวงอาทิตย์ตกทางทิศใดในตอนเย็น?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ทิศเหนือ</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ทิศตะวันตก</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ทิศตะวันออก</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ทิศใต้</span></div>
+      </div>
+    </div>
+
+    <!-- Q27 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">27</div>
+        <div class="q-text">หากนักเรียนหันหน้าไปทางทิศตะวันออก มือขวาของนักเรียนชี้ไปทางทิศใด?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ทิศเหนือ</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ทิศใต้</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ทิศตะวันตก</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ทิศตะวันออก</span></div>
+      </div>
+    </div>
+
+    <!-- Q28 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">28</div>
+        <div class="q-text">ความร้อนจากดวงอาทิตย์มีความสำคัญต่อสิ่งมีชีวิตอย่างไร?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">ทำให้โลกมืดสนิท</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ช่วยให้น้ำระเหยและเกิดวัฏจักรน้ำ</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">ทำให้โลกหนาวเย็น</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">ทำให้พืชเหี่ยวเฉาทุกต้น</span></div>
+      </div>
+    </div>
+
+    <!-- Q29 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">29</div>
+        <div class="q-text">เงาของต้นไม้จะยาวที่สุดในช่วงเวลาใดของวัน?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">เที่ยงวัน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">บ่ายสองโมง</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">เช้าตรู่หรือเย็นใกล้ค่ำ</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">กลางคืน</span></div>
+      </div>
+    </div>
+
+    <!-- Q30 -->
+    <div class="question-card">
+      <div class="question-top">
+        <div class="q-number earth-num">30</div>
+        <div class="q-text">ถ้าต้องการทราบทิศโดยใช้ดวงอาทิตย์ ควรสังเกตในช่วงเวลาใด?</div>
+      </div>
+      <div class="choices">
+        <div class="choice"><span class="choice-label">A</span><span class="choice-text">กลางคืน</span></div>
+        <div class="choice"><span class="choice-label">B</span><span class="choice-text">ตอนเช้าหรือตอนเย็น</span></div>
+        <div class="choice"><span class="choice-label">C</span><span class="choice-text">เวลาฝนตก</span></div>
+        <div class="choice"><span class="choice-label">D</span><span class="choice-text">เวลาท้องฟ้ามืดครึ้ม</span></div>
+      </div>
+    </div>
+
+    <div class="exam-footer">
+      ✦ ข้อสอบปลายภาคเรียนที่ 2 · วิชาวิทยาศาสตร์ ชั้นประถมศึกษาปีที่ 3 ✦ จำนวน 30 ข้อ · 30 คะแนน ✦
+    </div>
+
+  </div><!-- /tab-exam -->
+
+
+  <!-- ==================== ANSWER TAB ==================== -->
+  <div id="tab-answer" class="tab-content">
+
+    <div class="answer-key-header">
+      <div class="badge" style="background:white;color:#b8680a;display:inline-block;padding:4px 14px;border-radius:20px;font-weight:700;font-size:12px;margin-bottom:10px;font-family:'Kanit',sans-serif;letter-spacing:1px;">เฉลยข้อสอบ · สำหรับครู</div>
+      <h2>เฉลยข้อสอบปลายภาคเรียนที่ 2</h2>
+      <p>วิชาวิทยาศาสตร์ ชั้นประถมศึกษาปีที่ 3 · 30 ข้อ · 30 คะแนน</p>
+    </div>
+
+    <div class="score-section">
+      <h3>📊 สรุปคะแนน</h3>
+      <div class="score-boxes">
+        <div class="score-box">
+          <div class="s-label">คะแนนเต็ม</div>
+          <div class="s-value">30</div>
+          <div class="s-unit">คะแนน</div>
+        </div>
+        <div class="score-box">
+          <div class="s-label">ส่วนที่ 1 (ข้อ 1-22)</div>
+          <div class="s-value">22</div>
+          <div class="s-unit">คะแนน</div>
+        </div>
+        <div class="score-box">
+          <div class="s-label">ส่วนที่ 2 (ข้อ 23-30)</div>
+          <div class="s-value">8</div>
+          <div class="s-unit">คะแนน</div>
+        </div>
+        <div class="score-box">
+          <div class="s-label">คะแนนที่ได้</div>
+          <div class="s-value" style="color:var(--accent);">____</div>
+          <div class="s-unit">คะแนน</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1 answers -->
+    <div class="section-header energy" style="margin-top:0;">
+      <div class="section-icon">⚡</div>
+      <div class="section-title">ส่วนที่ 1: พลังงานไฟฟ้าและชีวิต (ข้อ 1–22)</div>
+    </div>
+
+    <div class="answer-grid">
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 1</div>
+        <div class="a-label">B</div>
+        <div class="a-text">หลอดไฟ</div>
+        <div class="a-explain">หลอดไฟเปลี่ยนพลังงานไฟฟ้า → พลังงานแสง</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 2</div>
+        <div class="a-label">C</div>
+        <div class="a-text">พลังงานกล</div>
+        <div class="a-explain">พัดลม: ไฟฟ้า → พลังงานกล (การหมุน)</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 3</div>
+        <div class="a-label">C</div>
+        <div class="a-text">พลังงานความร้อน</div>
+        <div class="a-explain">เตารีด: ไฟฟ้า → ความร้อน</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 4</div>
+        <div class="a-label">B</div>
+        <div class="a-text">พลังงานเสียง</div>
+        <div class="a-explain">วิทยุ: ไฟฟ้า → พลังงานเสียง</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 5</div>
+        <div class="a-label">A</div>
+        <div class="a-text">สายไฟ หลอดไฟ และถ่านไฟฉาย</div>
+        <div class="a-explain">วงจรไฟฟ้าอย่างง่ายต้องมีแหล่งพลังงาน ตัวนำ และเครื่องรับ</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 6</div>
+        <div class="a-label">B</div>
+        <div class="a-text">ไม่ครบวงจร ไฟฟ้าไม่ไหล</div>
+        <div class="a-explain">วงจรต้องครบจึงจะมีกระแสไฟฟ้าไหล</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 7</div>
+        <div class="a-label">B</div>
+        <div class="a-text">เป็นแหล่งพลังงาน</div>
+        <div class="a-explain">ถ่านไฟฉาย = แหล่งจ่ายพลังงานไฟฟ้า</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 8</div>
+        <div class="a-label">C</div>
+        <div class="a-text">ลวดทองแดง</div>
+        <div class="a-explain">โลหะเช่นทองแดงนำไฟฟ้าได้ดี</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 9</div>
+        <div class="a-label">C</div>
+        <div class="a-text">โรงไฟฟ้าพลังน้ำ (เขื่อน)</div>
+        <div class="a-explain">เขื่อนใช้แรงดันน้ำหมุนกังหันผลิตไฟฟ้า</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 10</div>
+        <div class="a-label">B</div>
+        <div class="a-text">แผงโซลาร์เซลล์</div>
+        <div class="a-explain">โซลาร์เซลล์แปลงแสงอาทิตย์เป็นไฟฟ้า</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 11</div>
+        <div class="a-label">A</div>
+        <div class="a-text">ให้ความสว่างแก่บ้านเรือน</div>
+        <div class="a-explain">ไฟฟ้าให้แสงสว่าง ความสะดวกสบาย</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 12</div>
+        <div class="a-label">B</div>
+        <div class="a-text">การรักษาพยาบาลและเครื่องมือแพทย์</div>
+        <div class="a-explain">ไฟฟ้าสำคัญมากในโรงพยาบาล</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 13</div>
+        <div class="a-label">B</div>
+        <div class="a-text">ปิดไฟและเครื่องใช้ไฟฟ้าทุกชนิด</div>
+        <div class="a-explain">ปิดทุกอย่างเมื่อไม่ใช้ ประหยัดสูงสุด</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 14</div>
+        <div class="a-label">C</div>
+        <div class="a-text">ใช้หลอด LED แทนหลอดไส้</div>
+        <div class="a-explain">LED ใช้ไฟน้อยกว่าหลอดไส้มาก</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 15</div>
+        <div class="a-label">B</div>
+        <div class="a-text">การใช้เครื่องใช้ไฟฟ้าใกล้น้ำ</div>
+        <div class="a-explain">น้ำนำไฟฟ้า อาจเกิดไฟฟ้าช็อตได้</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 16</div>
+        <div class="a-label">C</div>
+        <div class="a-text">แจ้งผู้ใหญ่และให้ช่างซ่อมแซม</div>
+        <div class="a-explain">ห้ามแก้ไขปลั๊กชำรุดเอง ต้องให้ผู้เชี่ยวชาญ</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 17</div>
+        <div class="a-label">C</div>
+        <div class="a-text">ประหยัดไฟฟ้าสูงสุด</div>
+        <div class="a-explain">เบอร์ 5 = ประสิทธิภาพการประหยัดไฟสูงสุด</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 18</div>
+        <div class="a-label">D</div>
+        <div class="a-text">น้ำแข็ง</div>
+        <div class="a-explain">น้ำแข็งไม่ใช่แหล่งพลังงานผลิตไฟฟ้า</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 19</div>
+        <div class="a-label">C</div>
+        <div class="a-text">ก่อให้เกิดมลพิษทางอากาศ</div>
+        <div class="a-explain">เผาถ่านหิน → ควันพิษ CO₂ PM2.5</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 20</div>
+        <div class="a-label">B</div>
+        <div class="a-text">ใช้พลังงานสะอาดหมุนเวียนได้</div>
+        <div class="a-explain">พลังงานลมสะอาด ไม่ปล่อยมลพิษ</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 21</div>
+        <div class="a-label">C</div>
+        <div class="a-text">แจ้งผู้ใหญ่/เจ้าหน้าที่ อย่าเข้าใกล้</div>
+        <div class="a-explain">สายไฟขาด อันตรายมาก ห้ามเข้าใกล้</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 22</div>
+        <div class="a-label">A</div>
+        <div class="a-text">หลอดไส้</div>
+        <div class="a-explain">หลอดไส้ให้ทั้งแสงสว่างและความร้อน</div>
+      </div>
+
+    </div>
+
+    <!-- Section 2 answers -->
+    <div class="section-header earth">
+      <div class="section-icon">🌍</div>
+      <div class="section-title">ส่วนที่ 2: วิทยาศาสตร์โลกและอวกาศ (ข้อ 23–30)</div>
+    </div>
+
+    <div class="answer-grid">
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 23</div>
+        <div class="a-label" style="color:var(--accent2);">B</div>
+        <div class="a-text">พลังงานแสงและพลังงานความร้อน</div>
+        <div class="a-explain">ดวงอาทิตย์ส่งแสงและความร้อนมาสู่โลก</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 24</div>
+        <div class="a-label" style="color:var(--accent2);">B</div>
+        <div class="a-text">การสังเคราะห์แสง</div>
+        <div class="a-explain">พืชใช้แสงอาทิตย์สร้างอาหารจากน้ำและ CO₂</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 25</div>
+        <div class="a-label" style="color:var(--accent2);">D</div>
+        <div class="a-text">ทิศตะวันออก</div>
+        <div class="a-explain">ดวงอาทิตย์ขึ้นทางทิศตะวันออกเสมอ</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 26</div>
+        <div class="a-label" style="color:var(--accent2);">B</div>
+        <div class="a-text">ทิศตะวันตก</div>
+        <div class="a-explain">ดวงอาทิตย์ตกทางทิศตะวันตกเสมอ</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 27</div>
+        <div class="a-label" style="color:var(--accent2);">B</div>
+        <div class="a-text">ทิศใต้</div>
+        <div class="a-explain">หันหน้า E มือขวา→ใต้ มือซ้าย→เหนือ หลัง→ตะวันตก</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 28</div>
+        <div class="a-label" style="color:var(--accent2);">B</div>
+        <div class="a-text">ช่วยให้น้ำระเหยและเกิดวัฏจักรน้ำ</div>
+        <div class="a-explain">ความร้อนจากดวงอาทิตย์ขับเคลื่อนวัฏจักรน้ำ</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 29</div>
+        <div class="a-label" style="color:var(--accent2);">C</div>
+        <div class="a-text">เช้าตรู่หรือเย็นใกล้ค่ำ</div>
+        <div class="a-explain">ดวงอาทิตย์ต่ำ เงายาว / เที่ยงวันดวงอาทิตย์สูง เงาสั้น</div>
+      </div>
+
+      <div class="answer-item">
+        <div class="q-ref">ข้อ 30</div>
+        <div class="a-label" style="color:var(--accent2);">B</div>
+        <div class="a-text">ตอนเช้าหรือตอนเย็น</div>
+        <div class="a-explain">เช้า→อาทิตย์ขึ้น=ตะวันออก / เย็น→ตก=ตะวันตก</div>
+      </div>
+
+    </div>
+
+    <!-- Answer Summary Table -->
+    <div class="score-section">
+      <h3>📋 ตารางสรุปเฉลย</h3>
+      <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:8px;">
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">ข้อ</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">1</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">2</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">3</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">4</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">5</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">6</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">7</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">8</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">9</div>
+
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:700;font-size:14px;color:#1a3a6b;">ตอบ</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">A</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">ข้อ</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">10</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">11</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">12</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">13</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">14</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">15</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">16</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">17</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">18</div>
+
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:700;font-size:14px;color:#1a3a6b;">ตอบ</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">A</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">D</div>
+
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">ข้อ</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">19</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">20</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">21</div>
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">22</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">23</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">24</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">25</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">26</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">27</div>
+
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:700;font-size:14px;color:#1a3a6b;">ตอบ</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">B</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">C</div>
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#c8290a;">A</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">B</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">B</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">D</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">B</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">B</div>
+
+        <div style="text-align:center;background:#1a3a6b;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">ข้อ</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">28</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">29</div>
+        <div style="text-align:center;background:#1a6b4a;color:white;border-radius:6px;padding:6px 0;font-weight:700;font-size:13px;">30</div>
+        <div style="text-align:center;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;border-radius:6px;padding:6px 0;"></div>
+
+        <div style="text-align:center;background:#eef3fb;border-radius:6px;padding:6px 0;font-weight:700;font-size:14px;color:#1a3a6b;">ตอบ</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">B</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">C</div>
+        <div style="text-align:center;background:#e6f4ee;border-radius:6px;padding:6px 0;font-weight:800;font-size:14px;color:#1a6b4a;">B</div>
+        <div style="text-align:center;background:#f9f9f9;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;background:#f9f9f9;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;background:#f9f9f9;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;background:#f9f9f9;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;background:#f9f9f9;border-radius:6px;padding:6px 0;"></div>
+        <div style="text-align:center;background:#f9f9f9;border-radius:6px;padding:6px 0;"></div>
+      </div>
+    </div>
+
+    <div class="exam-footer">
+      ✦ เฉลยข้อสอบปลายภาคเรียนที่ 2 · วิชาวิทยาศาสตร์ ป.3 ✦ สำหรับครูผู้สอนเท่านั้น ✦
+    </div>
+
+  </div><!-- /tab-answer -->
+
+</div><!-- /page -->
+
+<button class="print-btn" onclick="window.print()">🖨️ พิมพ์ข้อสอบ</button>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
