@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบภาษาไทย ชั้นประถมศึกษาปีที่ 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B9D;
+            --secondary: #FEC601;
+            --accent: #4ECDC4;
+            --success: #95E1D3;
+            --danger: #FF6B6B;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --border-radius: 20px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .header h1 {
+            font-family: 'Mali', cursive;
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .student-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .progress-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e2e8f0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .question-number {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(255, 107, 157, 0.3);
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            background: #f7fafc;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, rgba(255, 107, 157, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            transition: width 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            background: rgba(255, 107, 157, 0.05);
+        }
+
+        .option:hover::before {
+            width: 100%;
+        }
+
+        .option input[type="radio"] {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e0;
+            border-radius: 50%;
+            margin-right: 15px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .option input[type="radio"]::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            transition: transform 0.2s ease;
+        }
+
+        .option input[type="radio"]:checked {
+            border-color: var(--primary);
+        }
+
+        .option input[type="radio"]:checked::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .option.selected {
+            background: linear-gradient(90deg, rgba(255, 107, 157, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            border-color: var(--primary);
+        }
+
+        .option label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .option-letter {
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 30px;
+        }
+
+        .submit-section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            font-family: 'Mali', cursive;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-emoji {
+            font-size: 6em;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .result-score {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Mali', cursive;
+        }
+
+        .result-grade {
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .result-details {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .close-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--success) 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .knowledge-section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .knowledge-section h2 {
+            font-family: 'Mali', cursive;
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .knowledge-item {
+            background: #f7fafc;
+            border-left: 5px solid var(--accent);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 0 12px 12px 0;
+            transition: all 0.3s ease;
+        }
+
+        .knowledge-item:hover {
+            background: rgba(78, 205, 196, 0.1);
+            transform: translateX(5px);
+        }
+
+        .knowledge-item h3 {
+            color: var(--primary);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-family: 'Mali', cursive;
+        }
+
+        .knowledge-item p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .knowledge-example {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px dashed var(--accent);
+        }
+
+        .selected-indicator {
+            display: inline-block;
+            color: var(--success);
+            font-size: 1.2em;
+            margin-left: 10px;
+            animation: checkmark 0.3s ease;
+        }
+
+        @keyframes checkmark {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .question-card {
+                padding: 20px;
+            }
+
+            .question-text {
+                font-size: 1.1em;
+            }
+
+            .submit-btn {
+                padding: 15px 35px;
+                font-size: 1.1em;
+            }
+
+            .result-content {
+                padding: 30px 20px;
+            }
+        }
+
+        .instruction-box {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 2px dashed var(--primary);
+        }
+
+        .instruction-box p {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .instruction-box strong {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="student-avatar">👧</div>
+            <h1>แบบทดสอบภาษาไทย</h1>
+            <p>ชั้นประถมศึกษาปีที่ 3 ฉบับที่ 2</p>
+        </div>
+
+        <div class="instruction-box">
+            <p><strong>📝 คำชี้แจง:</strong> เลือกคำตอบที่ถูกต้องที่สุดเพียงคำตอบเดียว</p>
+            <p><strong>📊 จำนวนข้อ:</strong> 50 ข้อ</p>
+            <p><strong>⏱️ เกณฑ์การประเมิน:</strong> 80% ขึ้นไป = ดีเยี่ยม | 70-79% = ดี | 60-69% = ปานกลาง | ต่ำกว่า 60% = ควรพัฒนา</p>
+        </div>
+
+        <div class="progress-container">
+            <p style="margin-bottom: 10px; font-weight: 600; color: var(--text-dark);">ความคืบหน้า</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0/50</div>
+            </div>
+        </div>
+
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">1</div>
+                    <div class="question-text">ข้อใดมีมาตราตัวสะกดแม่กดมากที่สุด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" value="1" id="q1a">
+                        <label for="q1a"><span class="option-letter">A.</span> กองกรวดวางเรียงราย</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="2" id="q1b">
+                        <label for="q1b"><span class="option-letter">B.</span> บนภูซางมีต้นยางสูงใหญ่</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="3" id="q1c">
+                        <label for="q1c"><span class="option-letter">C.</span> กิ๊กกับกุ๊กไปตกปลาที่แม่น้ำกก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="4" id="q1d">
+                        <label for="q1d"><span class="option-letter">D.</span> เก๋ดแบกกระจาดไปตลาดซื้อผักกาด</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">2</div>
+                    <div class="question-text">ข้อใดอ่านออกเสียงมาตราตัวสะกดในแม่กกามากที่สุด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" value="1" id="q2a">
+                        <label for="q2a"><span class="option-letter">A.</span> ปูแสมไต่ต้นโกงกาง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="2" id="q2b">
+                        <label for="q2b"><span class="option-letter">B.</span> ดูให้แน่ว่าเสียงนกมาแต่ไหน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="3" id="q2c">
+                        <label for="q2c"><span class="option-letter">C.</span> ปลาด่าผํ่าด่ำดำว่ายในลำคลอง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="4" id="q2d">
+                        <label for="q2d"><span class="option-letter">D.</span> ลิงกระโดดห่ยองแหย็งเข้าป่าไป</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">3</div>
+                    <div class="question-text">ข้อใดกล่าวเกี่ยวกับวรรณยุกต์ไทยได้ถูกต้อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" value="1" id="q3a">
+                        <label for="q3a"><span class="option-letter">A.</span> วรรณยุกต์ในการแต่งกลอน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="2" id="q3b">
+                        <label for="q3b"><span class="option-letter">B.</span> วรรณยุกต์ไทยมี 4 รูป 5 เสียง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="3" id="q3c">
+                        <label for="q3c"><span class="option-letter">C.</span> รูปวรรณยุกต์จะวางไว้ใต้ตัวพยัญชนะ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="4" id="q3d">
+                        <label for="q3d"><span class="option-letter">D.</span> คำไทยทุกคำออกเสียงตรงตามวรรณยุกต์</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">4</div>
+                    <div class="question-text">ข้อใดอ่านถูกต้อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" value="1" id="q4a">
+                        <label for="q4a"><span class="option-letter">A.</span> เสด็จ อ่านว่า สะ-เด็ด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="2" id="q4b">
+                        <label for="q4b"><span class="option-letter">B.</span> สำเร็จ อ่านว่า สำ-เร็ด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="3" id="q4c">
+                        <label for="q4c"><span class="option-letter">C.</span> เคล็ดลับ อ่านว่า คะ-เล็ด-ลับ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="4" id="q4d">
+                        <label for="q4d"><span class="option-letter">D.</span> เอร็ดอร่อย อ่านว่า อะ-เร็ด-อะ-รอย</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">5</div>
+                    <div class="question-text">ข้อใดอ่านออกเสียงมาตราตัวสะกดเดียวกัน</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" value="1" id="q5a">
+                        <label for="q5a"><span class="option-letter">A.</span> สวด เสด็จ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="2" id="q5b">
+                        <label for="q5b"><span class="option-letter">B.</span> เฉลี่ย ละเอียด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="3" id="q5c">
+                        <label for="q5c"><span class="option-letter">C.</span> สงบ เสงี่ยม</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="4" id="q5d">
+                        <label for="q5d"><span class="option-letter">D.</span> ธูป เทศน์</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">6</div>
+                    <div class="question-text">ประโยคใดไม่มีคำที่ออกเสียงอย่างอักษรนำ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q6" value="1" id="q6a">
+                        <label for="q6a"><span class="option-letter">A.</span> พรไปซื้อพริกตอนพลบค่ำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="2" id="q6b">
+                        <label for="q6b"><span class="option-letter">B.</span> หมาหมอบข้างหม้อรอท้าหมั่น</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="3" id="q6c">
+                        <label for="q6c"><span class="option-letter">C.</span> หนูนอนหนาวริมหนองน้ำใส</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="4" id="q6d">
+                        <label for="q6d"><span class="option-letter">D.</span> ตาตลบเป็นคนตลกชอบเดินตลาด</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">7</div>
+                    <div class="question-text">"ตาซื้อเรือยาวลำใหม่ดูใหญ่กว่าเก่า" ข้อความนี้มีคำวิเศษณ์กี่คำ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q7" value="1" id="q7a">
+                        <label for="q7a"><span class="option-letter">A.</span> 2 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="2" id="q7b">
+                        <label for="q7b"><span class="option-letter">B.</span> 3 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="3" id="q7c">
+                        <label for="q7c"><span class="option-letter">C.</span> 4 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="4" id="q7d">
+                        <label for="q7d"><span class="option-letter">D.</span> 5 คำ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">8</div>
+                    <div class="question-text">ข้อใดเขียนถูกต้อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q8" value="1" id="q8a">
+                        <label for="q8a"><span class="option-letter">A.</span> อ่อนเยา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="2" id="q8b">
+                        <label for="q8b"><span class="option-letter">B.</span> อ่อนเยาร์</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="3" id="q8c">
+                        <label for="q8c"><span class="option-letter">C.</span> อ่อนเยาว์</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="4" id="q8d">
+                        <label for="q8d"><span class="option-letter">D.</span> อ่อนเยาวน์</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">9</div>
+                    <div class="question-text">ข้อใดไม่ใช่ประโยชน์ของอักษรย่อ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q9" value="1" id="q9a">
+                        <label for="q9a"><span class="option-letter">A.</span> เขียนคำได้สั้นลง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="2" id="q9b">
+                        <label for="q9b"><span class="option-letter">B.</span> เขียนได้เร็วมากขึ้น</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="3" id="q9c">
+                        <label for="q9c"><span class="option-letter">C.</span> เขียนได้สวยมากขึ้น</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" value="4" id="q9d">
+                        <label for="q9d"><span class="option-letter">D.</span> เขียนได้ในเวลาที่จำกัด</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">10</div>
+                    <div class="question-text">"แม่ทำสเต็กทูน่าให้ลูกกิน" ข้อความนี้มีคำภาษาต่างประเทศกี่คำ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q10" value="1" id="q10a">
+                        <label for="q10a"><span class="option-letter">A.</span> 2 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="2" id="q10b">
+                        <label for="q10b"><span class="option-letter">B.</span> 3 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="3" id="q10c">
+                        <label for="q10c"><span class="option-letter">C.</span> 4 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" value="4" id="q10d">
+                        <label for="q10d"><span class="option-letter">D.</span> 5 คำ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">11</div>
+                    <div class="question-text">ข้อใดไม่มีคำทับศัพท์ในประโยค</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q11" value="1" id="q11a">
+                        <label for="q11a"><span class="option-letter">A.</span> พ่อส่งอีเมลติดต่อธุรกิจ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" value="2" id="q11b">
+                        <label for="q11b"><span class="option-letter">B.</span> ตาขึ้นลิฟต์แทนการเดินขึ้นตึกสูง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" value="3" id="q11c">
+                        <label for="q11c"><span class="option-letter">C.</span> พี่ใช้อินเทอร์เน็ตสืบค้นหาข้อมูล</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" value="4" id="q11d">
+                        <label for="q11d"><span class="option-letter">D.</span> น้าขี่รถจักรยานยนต์ไปซื้ออาหารหน้าปากซอย</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">12</div>
+                    <div class="question-text">"คนดีมีสัจจะ" ข้อความนี้มีคำเป็นและคำตายอย่างละกี่คำ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q12" value="1" id="q12a">
+                        <label for="q12a"><span class="option-letter">A.</span> คำเป็น 1 คำ คำตาย 4 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" value="2" id="q12b">
+                        <label for="q12b"><span class="option-letter">B.</span> คำเป็น 4 คำ คำตาย 1 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" value="3" id="q12c">
+                        <label for="q12c"><span class="option-letter">C.</span> คำเป็น 2 คำ คำตาย 3 คำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" value="4" id="q12d">
+                        <label for="q12d"><span class="option-letter">D.</span> คำเป็น 3 คำ คำตาย 2 คำ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">13</div>
+                    <div class="question-text">ข้อใดกล่าวถึงคำตายไม่ถูกต้อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q13" value="1" id="q13a">
+                        <label for="q13a"><span class="option-letter">A.</span> ประสมด้วยสระเสียงสั้น</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" value="2" id="q13b">
+                        <label for="q13b"><span class="option-letter">B.</span> ประสมด้วยสระเสียงยาว</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" value="3" id="q13c">
+                        <label for="q13c"><span class="option-letter">C.</span> มีตัวสะกดในมาตราแม่กกา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" value="4" id="q13d">
+                        <label for="q13d"><span class="option-letter">D.</span> มีตัวสะกดในมาตราแม่กกดกับ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">14</div>
+                    <div class="question-text">ข้อใดเรียงลำดับคำตามพจนานุกรมถูกต้อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q14" value="1" id="q14a">
+                        <label for="q14a"><span class="option-letter">A.</span> ถุง ถัง ถู</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" value="2" id="q14b">
+                        <label for="q14b"><span class="option-letter">B.</span> ทุบ เท ทิ้ง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" value="3" id="q14c">
+                        <label for="q14c"><span class="option-letter">C.</span> ซ่อน ซ่อม ซัก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" value="4" id="q14d">
+                        <label for="q14d"><span class="option-letter">D.</span> ปิด เปิด ปล่อก</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">15</div>
+                    <div class="question-text">การเรียงลำดับเรื่องราวมีข้อดีอย่างไร</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q15" value="1" id="q15a">
+                        <label for="q15a"><span class="option-letter">A.</span> เนื้อเรื่องไม่สับสน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" value="2" id="q15b">
+                        <label for="q15b"><span class="option-letter">B.</span> เรื่องน่าอ่านเข้าใจง่าย</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" value="3" id="q15c">
+                        <label for="q15c"><span class="option-letter">C.</span> เรื่องมีความชัดเจน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" value="4" id="q15d">
+                        <label for="q15d"><span class="option-letter">D.</span> ถูกทุกข้อ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">16</div>
+                    <div class="question-text">ข้อใดไม่ใช่วิธีการเขียนเล่าเรื่อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q16" value="1" id="q16a">
+                        <label for="q16a"><span class="option-letter">A.</span> เรียบเรียงความคิดก่อนเขียน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" value="2" id="q16b">
+                        <label for="q16b"><span class="option-letter">B.</span> เขียนให้มีความตลกขบขัน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" value="3" id="q16c">
+                        <label for="q16c"><span class="option-letter">C.</span> เชื่อมโยงเนื้อหาให้ต่อเนื่องกัน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q16" value="4" id="q16d">
+                        <label for="q16d"><span class="option-letter">D.</span> ตั้งชื่อเรื่องให้สัมพันธ์กับเนื้อหา</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">17</div>
+                    <div class="question-text">ข้อใดไม่ใช่คำขวัญที่เกี่ยวกับสิ่งแวดล้อม</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q17" value="1" id="q17a">
+                        <label for="q17a"><span class="option-letter">A.</span> ไร้ป่าไร้ฝน ไร้คนไร้ชีวิต</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q17" value="2" id="q17b">
+                        <label for="q17b"><span class="option-letter">B.</span> ทิ้งขยะถูกที่สะอาดดีทั่วทั้งเมือง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q17" value="3" id="q17c">
+                        <label for="q17c"><span class="option-letter">C.</span> ปิดไฟเมื่อเลิกใช้สร้างนิสัยการประหยัด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q17" value="4" id="q17d">
+                        <label for="q17d"><span class="option-letter">D.</span> ชาติไทยจะรุ่งเรือง พลเมืองต้องมีวินัย</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">18</div>
+                    <div class="question-text">การฟังการดูให้ได้ประโยชน์จะต้องทำอย่างไร</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q18" value="1" id="q18a">
+                        <label for="q18a"><span class="option-letter">A.</span> ตั้งใจฟัง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q18" value="2" id="q18b">
+                        <label for="q18b"><span class="option-letter">B.</span> จดบันทึกสาระสำคัญ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q18" value="3" id="q18c">
+                        <label for="q18c"><span class="option-letter">C.</span> นำความรู้ที่ได้ไปปรับใช้</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q18" value="4" id="q18d">
+                        <label for="q18d"><span class="option-letter">D.</span> ถูกทุกข้อ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">19</div>
+                    <div class="question-text">ข้อใดเป็นมารยาทในการพูด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q19" value="1" id="q19a">
+                        <label for="q19a"><span class="option-letter">A.</span> ออกเสียงตามสะดวก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q19" value="2" id="q19b">
+                        <label for="q19b"><span class="option-letter">B.</span> พูดคุยด้วยเสียงที่ดังมาก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q19" value="3" id="q19c">
+                        <label for="q19c"><span class="option-letter">C.</span> พูดจากร้าวหยาบคาย</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q19" value="4" id="q19d">
+                        <label for="q19d"><span class="option-letter">D.</span> ใช้ถ้อยคำสุภาพเหมาะสมกับผู้ฟัง</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">20</div>
+                    <div class="question-text">ข้อใดเป็นมารยาทที่สำคัญที่สุดของการพูด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q20" value="1" id="q20a">
+                        <label for="q20a"><span class="option-letter">A.</span> ไม่พูดโกหกเสแสร้ง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q20" value="2" id="q20b">
+                        <label for="q20b"><span class="option-letter">B.</span> ไม่ทักทายด้วยคำหยาบ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q20" value="3" id="q20c">
+                        <label for="q20c"><span class="option-letter">C.</span> ไม่แสดงความสนิทสนมจนเกินไป</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q20" value="4" id="q20d">
+                        <label for="q20d"><span class="option-letter">D.</span> ไม่ทักทายด้วยคำหรือพูดเรื่องสะเทือนใจผู้ฟัง</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">21</div>
+                    <div class="question-text">ข้อใดไม่ควรปฏิบัติในการพูดแสดงความคิดเห็น</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q21" value="1" id="q21a">
+                        <label for="q21a"><span class="option-letter">A.</span> โต้เถียงเพื่อเอาชนะ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q21" value="2" id="q21b">
+                        <label for="q21b"><span class="option-letter">B.</span> ใช้เหตุผลมากกว่าอารมณ์</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q21" value="3" id="q21c">
+                        <label for="q21c"><span class="option-letter">C.</span> มีข้อมูลความรู้ในเรื่องที่พูด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q21" value="4" id="q21d">
+                        <label for="q21d"><span class="option-letter">D.</span> ใช้ถ้อยคำและน้ำเสียงที่สุภาพ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">22</div>
+                    <div class="question-text">ข้อใดกล่าวถูกต้องเกี่ยวกับการเล่าเรื่อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q22" value="1" id="q22a">
+                        <label for="q22a"><span class="option-letter">A.</span> เขียนเรื่องไปตามที่ใจคิด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q22" value="2" id="q22b">
+                        <label for="q22b"><span class="option-letter">B.</span> เขียนเรื่องเกี่ยวกับตัวบุคคล</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q22" value="3" id="q22c">
+                        <label for="q22c"><span class="option-letter">C.</span> เขียนเรื่องราวต่างๆ ตามที่พบเห็น</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q22" value="4" id="q22d">
+                        <label for="q22d"><span class="option-letter">D.</span> เขียนเรื่องไปตามคำบอกของผู้ใหญ่</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">23</div>
+                    <div class="question-text">ข้อใดกล่าวถูกต้องเกี่ยวกับลักษณะของคำคล้องจอง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q23" value="1" id="q23a">
+                        <label for="q23a"><span class="option-letter">A.</span> คำที่มีเสียงสระต่างกัน และมีตัวสะกดต่างกัน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q23" value="2" id="q23b">
+                        <label for="q23b"><span class="option-letter">B.</span> คำที่มีเสียงสระต่างกัน แต่มีตัวสะกดเหมือนกัน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q23" value="3" id="q23c">
+                        <label for="q23c"><span class="option-letter">C.</span> คำที่มีเสียงสระเหมือนกัน แต่มีตัวสะกดต่างกัน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q23" value="4" id="q23d">
+                        <label for="q23d"><span class="option-letter">D.</span> คำที่มีเสียงสระเหมือนกัน และมีตัวสะกดเหมือนกัน</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">24</div>
+                    <div class="question-text">ข้อใดเป็นคำคล้องจองของคำว่า "ช่วยเหลือ"</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q24" value="1" id="q24a">
+                        <label for="q24a"><span class="option-letter">A.</span> ดูแล</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q24" value="2" id="q24b">
+                        <label for="q24b"><span class="option-letter">B.</span> เกื้อกูล</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q24" value="3" id="q24c">
+                        <label for="q24c"><span class="option-letter">C.</span> ยามยาก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q24" value="4" id="q24d">
+                        <label for="q24d"><span class="option-letter">D.</span> พ่องเพื่อน</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">25</div>
+                    <div class="question-text">แผนภูมิและแผนผังมีประโยชน์ในเรื่องใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q25" value="1" id="q25a">
+                        <label for="q25a"><span class="option-letter">A.</span> ประหยัดเวลา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q25" value="2" id="q25b">
+                        <label for="q25b"><span class="option-letter">B.</span> ดึงดูดความสนใจ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q25" value="3" id="q25c">
+                        <label for="q25c"><span class="option-letter">C.</span> เข้าเรื่องได้รวดเร็ว</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q25" value="4" id="q25d">
+                        <label for="q25d"><span class="option-letter">D.</span> ถูกทุกข้อ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">26</div>
+                    <div class="question-text">สำนวนและคำขวัญมีลักษณะเหมือนกันในเรื่องใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q26" value="1" id="q26a">
+                        <label for="q26a"><span class="option-letter">A.</span> ใช้สอนให้ประพฤติดี</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q26" value="2" id="q26b">
+                        <label for="q26b"><span class="option-letter">B.</span> ใช้ประกอบการสนทนา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q26" value="3" id="q26c">
+                        <label for="q26c"><span class="option-letter">C.</span> ให้ข้อคิดหรือคติเตือนใจ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q26" value="4" id="q26d">
+                        <label for="q26d"><span class="option-letter">D.</span> ใช้เปรียบเทียบเรื่องต่างๆ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">27</div>
+                    <div class="question-text">คำขวัญในข้อใดที่นักเรียนควรยึดถือปฏิบัติมากที่สุด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q27" value="1" id="q27a">
+                        <label for="q27a"><span class="option-letter">A.</span> เมาแล้วขับ อาจดับชีวิต</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q27" value="2" id="q27b">
+                        <label for="q27b"><span class="option-letter">B.</span> ตั้งใจ พากเพียรเรียนวิชา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q27" value="3" id="q27c">
+                        <label for="q27c"><span class="option-letter">C.</span> รักประชาธิปไตยร่วมใจออกไปใช้สิทธิ์</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q27" value="4" id="q27d">
+                        <label for="q27d"><span class="option-letter">D.</span> ปิดไฟเมื่อเลิกใช้งาน ไม่เผาผลาญพลังงานชาติ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 28 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">28</div>
+                    <div class="question-text">ประโยชน์ของการเขียนบันทึกเหตุการณ์ประจำวันคือข้อใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q28" value="1" id="q28a">
+                        <label for="q28a"><span class="option-letter">A.</span> เพื่อเตือนความทรงจำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q28" value="2" id="q28b">
+                        <label for="q28b"><span class="option-letter">B.</span> เพื่อฝึกฝนทักษะการเขียน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q28" value="3" id="q28c">
+                        <label for="q28c"><span class="option-letter">C.</span> สามารถแสดงความคิดเห็นต่อเหตุการณ์ที่พบ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q28" value="4" id="q28d">
+                        <label for="q28d"><span class="option-letter">D.</span> ถูกทุกข้อ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 29 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">29</div>
+                    <div class="question-text">ข้อใดเป็นภาษาถิ่นใต้</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q29" value="1" id="q29a">
+                        <label for="q29a"><span class="option-letter">A.</span> อู๋</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q29" value="2" id="q29b">
+                        <label for="q29b"><span class="option-letter">B.</span> เว้า</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q29" value="3" id="q29c">
+                        <label for="q29c"><span class="option-letter">C.</span> พูด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q29" value="4" id="q29d">
+                        <label for="q29d"><span class="option-letter">D.</span> แหล่ง</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 30 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">30</div>
+                    <div class="question-text">"แอ๋วกาด" เป็นภาษาถิ่นใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q30" value="1" id="q30a">
+                        <label for="q30a"><span class="option-letter">A.</span> ถิ่นใต้</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q30" value="2" id="q30b">
+                        <label for="q30b"><span class="option-letter">B.</span> ถิ่นเหนือ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q30" value="3" id="q30c">
+                        <label for="q30c"><span class="option-letter">C.</span> ถิ่นกลาง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q30" value="4" id="q30d">
+                        <label for="q30d"><span class="option-letter">D.</span> ถิ่นอีสาน</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 31 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">31</div>
+                    <div class="question-text">ข้อใดไม่ใช่เป็นประโยชน์ของการละเล่นประเภทต่างๆ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q31" value="1" id="q31a">
+                        <label for="q31a"><span class="option-letter">A.</span> ฝึกทักษะการอ่าน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q31" value="2" id="q31b">
+                        <label for="q31b"><span class="option-letter">B.</span> ฝึกทักษะทางภาษา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q31" value="3" id="q31c">
+                        <label for="q31c"><span class="option-letter">C.</span> ทำให้ร่างกายแข็งแรง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q31" value="4" id="q31d">
+                        <label for="q31d"><span class="option-letter">D.</span> สร้างความสามัคคีปรองดอง</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 32 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">32</div>
+                    <div class="question-text">"ย่ำค่ำ" คือเวลาในข้อใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q32" value="1" id="q32a">
+                        <label for="q32a"><span class="option-letter">A.</span> 06.00 นาฬิกา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q32" value="2" id="q32b">
+                        <label for="q32b"><span class="option-letter">B.</span> 12.00 นาฬิกา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q32" value="3" id="q32c">
+                        <label for="q32c"><span class="option-letter">C.</span> 18.00 นาฬิกา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q32" value="4" id="q32d">
+                        <label for="q32d"><span class="option-letter">D.</span> 24.00 นาฬิกา</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 33 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">33</div>
+                    <div class="question-text">ข้อใดมีพยัญชนะที่ไม่อ่านออกเสียงเหมือนกับคำว่า "พรหม"</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q33" value="1" id="q33a">
+                        <label for="q33a"><span class="option-letter">A.</span> บาตร</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q33" value="2" id="q33b">
+                        <label for="q33b"><span class="option-letter">B.</span> สารท</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q33" value="3" id="q33c">
+                        <label for="q33c"><span class="option-letter">C.</span> ปฏิบัติ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q33" value="4" id="q33d">
+                        <label for="q33d"><span class="option-letter">D.</span> กษัตริย์</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 34 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">34</div>
+                    <div class="question-text">ข้อใดกล่าวถึงการเขียนประกาศทางการถูกต้องที่สุด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q34" value="1" id="q34a">
+                        <label for="q34a"><span class="option-letter">A.</span> เขียนบอกรายละเอียดให้มากที่สุด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q34" value="2" id="q34b">
+                        <label for="q34b"><span class="option-letter">B.</span> การเขียนประกาศนิยมเขียนด้วยภาษาพูด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q34" value="3" id="q34c">
+                        <label for="q34c"><span class="option-letter">C.</span> ต้องใส่หมายเลขโทรศัพท์เพื่อขอทราบรายละเอียดเพิ่มเติม</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q34" value="4" id="q34d">
+                        <label for="q34d"><span class="option-letter">D.</span> ระบุชื่อและตำแหน่งของผู้ประกาศไว้ที่ท้ายประกาศ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 35 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">35</div>
+                    <div class="question-text">การพูดปฏิเสธควรจะพูดแบบใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q35" value="1" id="q35a">
+                        <label for="q35a"><span class="option-letter">A.</span> ขวานผ่าซาก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q35" value="2" id="q35b">
+                        <label for="q35b"><span class="option-letter">B.</span> มะนาวไม่มีน้ำ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q35" value="3" id="q35c">
+                        <label for="q35c"><span class="option-letter">C.</span> น้ำลงบนใบบอน</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q35" value="4" id="q35d">
+                        <label for="q35d"><span class="option-letter">D.</span> บัวไม่ให้ชำ้ น้ำไม่ให้ขุ่น</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 36 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">36</div>
+                    <div class="question-text">การกระทำในข้อใดที่แสดงว่าเป็นการยอมรับ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q36" value="1" id="q36a">
+                        <label for="q36a"><span class="option-letter">A.</span> สายหน้า</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q36" value="2" id="q36b">
+                        <label for="q36b"><span class="option-letter">B.</span> เกาศีรษะ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q36" value="3" id="q36c">
+                        <label for="q36c"><span class="option-letter">C.</span> พยักหน้า</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q36" value="4" id="q36d">
+                        <label for="q36d"><span class="option-letter">D.</span> โบกมือไปมา</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 37 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">37</div>
+                    <div class="question-text">ข้อใดกล่าวถึงภาษาเขียนถูกต้องที่สุด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q37" value="1" id="q37a">
+                        <label for="q37a"><span class="option-letter">A.</span> ภาษาที่เป็นกันเองและสุภาพ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q37" value="2" id="q37b">
+                        <label for="q37b"><span class="option-letter">B.</span> ภาษาที่ใช้พูดจากันตามปกติทั่วไป</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q37" value="3" id="q37c">
+                        <label for="q37c"><span class="option-letter">C.</span> ภาษาที่ใช้ในการเขียนเท่านั้น ไม่ใช้การพูดอย่างเด็ดขาด</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q37" value="4" id="q37d">
+                        <label for="q37d"><span class="option-letter">D.</span> ภาษาที่เคร่งครัดในการใช้ถ้อยคำอย่างเป็นแบบแผน</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 38 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">38</div>
+                    <div class="question-text">ข้อใดกล่าวไม่ถูกต้องเกี่ยวกับลักษณะของภาษาพูด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q38" value="1" id="q38a">
+                        <label for="q38a"><span class="option-letter">A.</span> เป็นภาษาที่ใช้ในระดับพิธีการ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q38" value="2" id="q38b">
+                        <label for="q38b"><span class="option-letter">B.</span> ใช้ภาษาเป็นกันเองแต่สุภาพ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q38" value="3" id="q38c">
+                        <label for="q38c"><span class="option-letter">C.</span> ใช้ประโยคที่ถูกต้องตามหลักภาษา</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q38" value="4" id="q38d">
+                        <label for="q38d"><span class="option-letter">D.</span> ไม่ควรใช้ภาษาพูดในการเขียนที่เป็นทางการ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 39 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">39</div>
+                    <div class="question-text">สิ่งสำคัญที่สุดในการพูดแสดงความคิดเห็นคืออะไร</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q39" value="1" id="q39a">
+                        <label for="q39a"><span class="option-letter">A.</span> ลีลาน้ำเสียง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q39" value="2" id="q39b">
+                        <label for="q39b"><span class="option-letter">B.</span> ถ้อยคำสุภาพ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q39" value="3" id="q39c">
+                        <label for="q39c"><span class="option-letter">C.</span> เหตุผลประกอบ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q39" value="4" id="q39d">
+                        <label for="q39d"><span class="option-letter">D.</span> ท่าทางประกอบการพูด</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 40 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">40</div>
+                    <div class="question-text">การพูดแสดงความคิดเห็นควรพูดอย่างไร</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q40" value="1" id="q40a">
+                        <label for="q40a"><span class="option-letter">A.</span> พูดตามที่เป็นจริง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q40" value="2" id="q40b">
+                        <label for="q40b"><span class="option-letter">B.</span> พูดเห็นด้วยกับเพื่อนสนิท</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q40" value="3" id="q40c">
+                        <label for="q40c"><span class="option-letter">C.</span> พูดเห็นด้วยกับเสียงข้างมาก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q40" value="4" id="q40d">
+                        <label for="q40d"><span class="option-letter">D.</span> พูดเป็นกลางๆ ไม่ลำเอียงเข้าข้างฝ่ายใดฝ่ายหนึ่ง</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 41 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">41</div>
+                    <div class="question-text">คำพูดในข้อใดที่นักเรียนควรพูดให้ติดปากอยู่เสมอ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q41" value="1" id="q41a">
+                        <label for="q41a"><span class="option-letter">A.</span> สวัสดี</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q41" value="2" id="q41b">
+                        <label for="q41b"><span class="option-letter">B.</span> ขอโทษ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q41" value="3" id="q41c">
+                        <label for="q41c"><span class="option-letter">C.</span> ขอบคุณ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q41" value="4" id="q41d">
+                        <label for="q41d"><span class="option-letter">D.</span> ถูกทุกข้อ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 42 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">42</div>
+                    <div class="question-text">"อนุวัฒน์เข้าวัดเป็นกิจวัตร" ข้อความนี้มีคำพ้องชนิดใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q42" value="1" id="q42a">
+                        <label for="q42a"><span class="option-letter">A.</span> คำพ้องรูป</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q42" value="2" id="q42b">
+                        <label for="q42b"><span class="option-letter">B.</span> คำพ้องเสียง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q42" value="3" id="q42c">
+                        <label for="q42c"><span class="option-letter">C.</span> คำพ้องความหมาย</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q42" value="4" id="q42d">
+                        <label for="q42d"><span class="option-letter">D.</span> คำพ้องทั้งรูปและเสียง</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 43 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">43</div>
+                    <div class="question-text">"ผู้เฒ่ากวาดขี้เถ้าออกเป็นกองเท่าๆ กัน" ข้อความนี้เป็นคำพ้องชนิดใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q43" value="1" id="q43a">
+                        <label for="q43a"><span class="option-letter">A.</span> คำพ้องรูป</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q43" value="2" id="q43b">
+                        <label for="q43b"><span class="option-letter">B.</span> คำพ้องเสียง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q43" value="3" id="q43c">
+                        <label for="q43c"><span class="option-letter">C.</span> คำพ้องความหมาย</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q43" value="4" id="q43d">
+                        <label for="q43d"><span class="option-letter">D.</span> คำพ้องทั้งรูปและเสียง</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 44 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">44</div>
+                    <div class="question-text">ข้อใดเป็นการเขียนให้ปฏิบัติตามคำแนะนำ</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q44" value="1" id="q44a">
+                        <label for="q44a"><span class="option-letter">A.</span> ปิดทำการชั่วคราว</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q44" value="2" id="q44b">
+                        <label for="q44b"><span class="option-letter">B.</span> ขออภัย เครื่องยนต์ขัดข้อง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q44" value="3" id="q44c">
+                        <label for="q44c"><span class="option-letter">C.</span> หยอดเหรียญให้ครบตามจำนวนแล้วรอรับเครื่องดื่มที่ช่องรับสินค้า</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q44" value="4" id="q44d">
+                        <label for="q44d"><span class="option-letter">D.</span> ภาชนะชิ้นนี้ช่วยรักษาสิ่งแวดล้อมเพราะสามารถย่อยสลายได้ง่าย</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 45 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">45</div>
+                    <div class="question-text">ข้อใดเป็นคำโฆษณาขายบ้าน</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q45" value="1" id="q45a">
+                        <label for="q45a"><span class="option-letter">A.</span> ส่งปุ๊บ รับปั๊บ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q45" value="2" id="q45b">
+                        <label for="q45b"><span class="option-letter">B.</span> ถึงที่หมายอย่างปลอดภัย</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q45" value="3" id="q45c">
+                        <label for="q45c"><span class="option-letter">C.</span> อบอุ่น มั่นคง เดินทางสะดวก</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q45" value="4" id="q45d">
+                        <label for="q45d"><span class="option-letter">D.</span> แข็งแรง ทนทาน ประหยัดน้ำมัน</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 46 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">46</div>
+                    <div class="question-text">ลักษณะสำคัญของการเขียนโฆษณาคือข้อใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q46" value="1" id="q46a">
+                        <label for="q46a"><span class="option-letter">A.</span> สั้นกระชับได้ใจความ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q46" value="2" id="q46b">
+                        <label for="q46b"><span class="option-letter">B.</span> เลือกใช้แต่ภาษาเขียนเท่านั้น</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q46" value="3" id="q46c">
+                        <label for="q46c"><span class="option-letter">C.</span> บอกจุดบกพร่องของตัวสินค้า</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q46" value="4" id="q46d">
+                        <label for="q46d"><span class="option-letter">D.</span> ระบุรายละเอียดทั้งหมดให้ครบ</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 47 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">47</div>
+                    <div class="question-text">ข้อใดมีความหมายเหมือน "คำคล้องจอง"</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q47" value="1" id="q47a">
+                        <label for="q47a"><span class="option-letter">A.</span> คำเป็น</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q47" value="2" id="q47b">
+                        <label for="q47b"><span class="option-letter">B.</span> คำสัมผัส</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q47" value="3" id="q47c">
+                        <label for="q47c"><span class="option-letter">C.</span> คำโบราณ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q47" value="4" id="q47d">
+                        <label for="q47d"><span class="option-letter">D.</span> คำประพันธ์</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 48 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">48</div>
+                    <div class="question-text">สำนวนใดมีความหมายเหมือน "ได้พลอย"</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q48" value="1" id="q48a">
+                        <label for="q48a"><span class="option-letter">A.</span> ดาวคางฟ้า</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q48" value="2" id="q48b">
+                        <label for="q48b"><span class="option-letter">B.</span> กิ้งก่าได้ทอง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q48" value="3" id="q48c">
+                        <label for="q48c"><span class="option-letter">C.</span> วานรได้แก้ว</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q48" value="4" id="q48d">
+                        <label for="q48d"><span class="option-letter">D.</span> กระต่ายตื่นตูม</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 49 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">49</div>
+                    <div class="question-text">ข้อใดควรปฏิบัติเป็นขั้นตอนแรกในการเขียนโครงเรื่อง</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q49" value="1" id="q49a">
+                        <label for="q49a"><span class="option-letter">A.</span> กำหนดหัวข้อ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q49" value="2" id="q49b">
+                        <label for="q49b"><span class="option-letter">B.</span> เขียนขยายโครงเรื่อง</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q49" value="3" id="q49c">
+                        <label for="q49c"><span class="option-letter">C.</span> ศึกษารายละเอียดของหัวข้อ</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q49" value="4" id="q49d">
+                        <label for="q49d"><span class="option-letter">D.</span> เขียนแผนภาพและรายละเอียด</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 50 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">50</div>
+                    <div class="question-text">นักเรียนสามารถศึกษาและรวบรวมเนื้อหาได้จากข้อใด</div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q50" value="1" id="q50a">
+                        <label for="q50a"><span class="option-letter">A.</span> โทรทัศน์</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q50" value="2" id="q50b">
+                        <label for="q50b"><span class="option-letter">B.</span> อินเทอร์เน็ต</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q50" value="3" id="q50c">
+                        <label for="q50c"><span class="option-letter">C.</span> หนังสือพิมพ์</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q50" value="4" id="q50d">
+                        <label for="q50d"><span class="option-letter">D.</span> ถูกทุกข้อ</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="checkAnswers()">ตรวจคำตอบ 🎯</button>
+            </div>
+        </form>
+
+        <!-- Knowledge Section -->
+        <div class="knowledge-section">
+            <h2>💡 เกร็ดความรู้เพิ่มเติม</h2>
+            
+            <div class="knowledge-item">
+                <h3>📚 ภาษาไทยมาตรฐานและภาษาถิ่น</h3>
+                <p><strong>ภาษาไทยมาตรฐาน</strong> มีลักษณะเป็นคำที่ประสมด้วยสระเสียงยาวในแม่กกา และคำที่มีตัวสะกดในแม่กง กม กย กว</p>
+                <div class="knowledge-example">
+                    <strong>ตัวอย่าง:</strong> กา ดี ปู โต (สระเสียงยาว) | พัง ดิน ผม ยาย ขาว (มีตัวสะกด)
+                </div>
+                <p style="margin-top: 15px;"><strong>ภาษาถิ่น</strong> มีลักษณะเป็นคำที่ประสมด้วยสระเสียงสั้นในแม่กกา และคำที่มีตัวสะกดในแม่กกด กบ</p>
+                <div class="knowledge-example">
+                    <strong>ตัวอย่าง:</strong> ละ บิ จุ เต โป (สระเสียงสั้น) | ตาก วาด จับ (มีตัวสะกด)
+                </div>
+            </div>
+
+            <div class="knowledge-item">
+                <h3>🎯 ประโยชน์ของการอ่านป้ายโฆษณา</h3>
+                <p>การอ่านป้ายโฆษณามีประโยชน์ต่อตัวเองหลายประการ เช่น:</p>
+                <ul style="margin: 15px 0 15px 30px; line-height: 1.8;">
+                    <li>ช่วยฝึกการอ่านและทักษะทางภาษา</li>
+                    <li>ฝึกการเป็นคนช่างสังเกตรายละเอียด</li>
+                    <li>รู้จักกลวิธีการเขียนเพื่อเชิญชวนและชักจูงใจ</li>
+                    <li>เข้าใจการเขียนที่มีลักษณะเพื่อโน้มน้าวใจ</li>
+                    <li>สามารถแยกแยะข้อมูลที่เป็นประโยชน์และไม่เป็นประโยชน์</li>
+                </ul>
+                <div class="knowledge-example">
+                    <strong>💭 ข้อคิด:</strong> การอ่านป้ายโฆษณาอย่างมีวิจารณญาณจะช่วยให้เราไม่หลงเชื่อข้อมูลที่อาจไม่ตรงความเป็นจริง
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Modal -->
+        <div class="result-modal" id="resultModal">
+            <div class="result-content">
+                <div class="result-emoji" id="resultEmoji">🎉</div>
+                <div class="result-score" id="resultScore">0/50</div>
+                <div class="result-grade" id="resultGrade">ผลการทดสอบ</div>
+                
+                <div class="result-details">
+                    <div class="result-row">
+                        <span>คะแนนที่ได้</span>
+                        <strong id="scoreText">0 คะแนน</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>ร้อยละ</span>
+                        <strong id="percentText">0%</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>ข้อถูก</span>
+                        <strong id="correctText" style="color: var(--success);">0 ข้อ</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>ข้อผิด</span>
+                        <strong id="wrongText" style="color: var(--danger);">0 ข้อ</strong>
+                    </div>
+                </div>
+
+                <button class="close-btn" onclick="closeResult()">ปิด</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Correct answers
+        const answers = {
+            q1: '3', q2: '3', q3: '4', q4: '4', q5: '2',
+            q6: '4', q7: '3', q8: '4', q9: '3', q10: '1',
+            q11: '1', q12: '3', q13: '2', q14: '4', q15: '1',
+            q16: '4', q17: '3', q18: '1', q19: '4', q20: '1',
+            q21: '4', q22: '3', q23: '1', q24: '3', q25: '4',
+            q26: '3', q27: '4', q28: '2', q29: '3', q30: '2',
+            q31: '3', q32: '1', q33: '4', q34: '3', q35: '4',
+            q36: '1', q37: '2', q38: '3', q39: '3', q40: '1',
+            q41: '2', q42: '4', q43: '3', q44: '1', q45: '4',
+            q46: '3', q47: '4', q48: '2', q49: '2', q50: '4'
+        };
+
+        // Track selected answers
+        let selectedAnswers = {};
+
+        // Add event listeners to all radio buttons
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const questionName = this.name;
+                selectedAnswers[questionName] = this.value;
+                
+                // Update option styling
+                const parentOption = this.closest('.option');
+                const allOptions = parentOption.parentElement.querySelectorAll('.option');
+                
+                allOptions.forEach(opt => opt.classList.remove('selected'));
+                parentOption.classList.add('selected');
+                
+                // Add checkmark indicator
+                const label = parentOption.querySelector('label');
+                if (!label.querySelector('.selected-indicator')) {
+                    const indicator = document.createElement('span');
+                    indicator.className = 'selected-indicator';
+                    indicator.textContent = '✓';
+                    label.appendChild(indicator);
+                }
+                
+                updateProgress();
+            });
+        });
+
+        function updateProgress() {
+            const totalQuestions = 50;
+            const answeredCount = Object.keys(selectedAnswers).length;
+            const percentage = (answeredCount / totalQuestions) * 100;
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = answeredCount + '/50';
+        }
+
+        function checkAnswers() {
+            // Check if all questions are answered
+            if (Object.keys(selectedAnswers).length < 50) {
+                alert('❌ กรุณาทำข้อสอบให้ครบทุกข้อก่อนตรวจคำตอบ');
+                return;
+            }
+
+            let correct = 0;
+            let wrong = 0;
+
+            // Calculate score
+            for (let q in answers) {
+                if (selectedAnswers[q] === answers[q]) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            }
+
+            const percentage = (correct / 50) * 100;
+            let grade, emoji;
+
+            // Determine grade
+            if (percentage >= 80) {
+                grade = 'ดีเยี่ยม';
+                emoji = '🌟';
+            } else if (percentage >= 70) {
+                grade = 'ดี';
+                emoji = '😊';
+            } else if (percentage >= 60) {
+                grade = 'ปานกลาง';
+                emoji = '👍';
+            } else {
+                grade = 'ควรพัฒนา';
+                emoji = '💪';
+            }
+
+            // Display results
+            document.getElementById('resultEmoji').textContent = emoji;
+            document.getElementById('resultScore').textContent = correct + '/50';
+            document.getElementById('resultGrade').textContent = grade;
+            document.getElementById('scoreText').textContent = correct + ' คะแนน';
+            document.getElementById('percentText').textContent = percentage.toFixed(2) + '%';
+            document.getElementById('correctText').textContent = correct + ' ข้อ';
+            document.getElementById('wrongText').textContent = wrong + ' ข้อ';
+
+            document.getElementById('resultModal').style.display = 'flex';
+        }
+
+        function closeResult() {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('resultModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeResult();
+            }
+        });
+    </script>
+</body>
+</html>
